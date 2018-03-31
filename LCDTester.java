@@ -11,9 +11,9 @@ public class LCDTester {
     public static void main(String[] args) {
 
         // Establece los segmentos de cada numero
-        List<String> listaComando = new ArrayList<>();
+        List<String> ordenesDeImpresion = new ArrayList<>();
         String comando;
-        int espacioDig;
+        int espacioEntreDigitos;
         
         try {
 
@@ -25,10 +25,10 @@ public class LCDTester {
                 // Valida si es un numero
                 if (ImpresorLCD.esNumerico(comando)) 
                 {
-                    espacioDig = Integer.parseInt(comando);
+                    espacioEntreDigitos = Integer.parseInt(comando);
                     
                     // se valida que el espaciado este entre 0 y 5
-                    if(espacioDig <0 || espacioDig >5)
+                    if(espacioEntreDigitos <0 || espacioEntreDigitos >5)
                     {
                         throw new IllegalArgumentException("El espacio entre "
                                 + "digitos debe estar entre 0 y 5");
@@ -47,24 +47,26 @@ public class LCDTester {
                     comando = lector.next();
                     if(!comando.equalsIgnoreCase(CADENA_FINAL))
                     {
-                        listaComando.add(comando);
+                        ordenesDeImpresion.add(comando);
                     }
                 }while (!comando.equalsIgnoreCase(CADENA_FINAL)); 
             }
 
             ImpresorLCD impresorLCD = new ImpresorLCD();
 
-            Iterator<String> iterator = listaComando.iterator();
+            Iterator<String> iterator = ordenesDeImpresion.iterator();
             while (iterator.hasNext()) 
             {
                 try 
                 {
-                    impresorLCD.procesar(iterator.next(), espacioDig);
+                    
+                    impresorLCD.imprimir(iterator.next(), espacioEntreDigitos);
                 } catch (Exception ex) 
                 {
                     System.out.println("Error: "+ex.getMessage());
                 }
             }
+
         } catch (Exception ex) 
         {
             System.out.println("Error: "+ex.getMessage());

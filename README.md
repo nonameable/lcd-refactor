@@ -103,6 +103,16 @@ Esto es bastante trivial, dada su definición inicial mencionada al comienzo de 
 Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfección, decidí cambiar la definición, para que cuando alguien lea el código no tenga la misma confusión que yo tuve. 
 
 
+### Nuevas funciones
+
+1. Cambié el nombre de imprimirNumero a imprimirDigitos, pues esa es la responsabilidad de ese método. El nombre anterior era confuso, pues podría dar a entender que se estaba imprimiendo sólo uno de los digitos de toda la cadena.
+
+
+2. Cree el método obtenerDigitos que permite obtener los dígitos a partir de un String particular, validando que todos los caracteres sean números. Esta conversión y verificación antes se hacia dentro de imprimirDigitos(), lo que implicaba que las responsabilidades de ese método eran muchas. Como este método se implementó, cambié los parámetros de entrada de imprimirDigitos(), para que le llegue un int array con los dígitos a imprimir. 
+
+
+
+
 
 
 

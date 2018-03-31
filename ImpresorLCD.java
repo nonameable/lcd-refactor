@@ -209,19 +209,17 @@ public class ImpresorLCD {
 
     /**
      *
-     * Metodo encargado de imprimir un numero
+     * Metodo encargado de imprimir los digitos
      *
      * @param tamanioDigito Tamaño Segmento Digitos
-     * @param numeroImp Numero a Imprimir
+     * @param int[] digitos array con los digitos a a Imprimir
      * @param espacio Espacio Entre digitos
      */    
-    private void imprimirNumero(int tamanioDigito, String numeroImp, int espacio) 
+    private void imprimirDigitos(int tamanioDigito, int[] digitos, int espacio) 
     {
         // Variable que permite moverse en la dimension X de la matriz de impresion
         int pivotX = 0;
         
-        char[] digitos;
-
         this.tamanioDigito = tamanioDigito;
 
         // Calcula el numero de filas cada digito
@@ -234,37 +232,20 @@ public class ImpresorLCD {
         this.totalFilas = this.filasDigito;
 
         // Calcula el total de columnas de la matriz en la que se almacenaran los digitos
-        this.totalColumnas
- = (this.columnasDigito * numeroImp.length())
-                + (espacio * numeroImp.length()); // deberia ser menos 1, a menos que queramos espacio despues del ultimo digito
-
+        this.totalColumnas = (this.columnasDigito * digitos.length
+                + (espacio * digitos.length)); 
         // crea matriz para almacenar los numero a imprimir
-        this.matrizImpresion
- = new String[this.totalFilas][this.totalColumnas];
-
-        // crea el arreglo de digitos
-        digitos = numeroImp.toCharArray();
+        this.matrizImpresion = new String[this.totalFilas][this.totalColumnas];
 
         // Inicializa matriz
         for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColumnas
-        ; j++) {
-                this.matrizImpresion
-        [i][j] = " ";
+            for (int j = 0; j < this.totalColumnas; j++) {
+                this.matrizImpresion[i][j] = " ";
             }
         }
 
-        for (char digito : digitos) {
+        for (int digito : digitos) {
             
-            //Valida que el caracter sea un digito
-            if( ! Character.isDigit(digito))
-            {
-                throw new IllegalArgumentException("Caracter " + digito
-                    + " no es un digito");
-            }
-
-            int numero = Integer.parseInt(String.valueOf(digito));
-
             //Calcula puntos fijos
             this.pf1[0] = 0;
             this.pf1[1] = 0 + pivotX;
@@ -283,54 +264,86 @@ public class ImpresorLCD {
 
             pivotX = pivotX + this.columnasDigito + espacio;
 
-            adicionarDigito(numero);
+            adicionarDigito(digito);
         }
 
         // Imprime matriz
         for (int i = 0; i < this.totalFilas; i++) {
             for (int j = 0; j < this.totalColumnas
         ; j++) {
-                System.out.print(this.matrizImpresion
-            [i][j]);
+                System.out.print(this.matrizImpresion[i][j]);
             }
             System.out.println();
         }
     }
+
+
+      /**
+     *
+     * Metodo que retorna un int array con los digitos contenidos en un String.
+     * En caso de que alguno de los caracteres del String no sea un digito,
+     * lanza una IllegalArgumentException. 
+     *
+     * @param String que contiene la cadena de digitos
+     */
+    private int[] obtenerDigitos(String digitosComoString) throws IllegalArgumentException{
+        // Obtiene la cadena de digitos a imprimir
+        char[] digitosComoCharArray = digitosComoString.toCharArray();
+        int[] digitos = new int[digitosComoCharArray.length];
+        
+        for (int i = 0; i < digitosComoCharArray.length; i++) {
+            
+            //Valida que el caracter sea un digito
+            char digitoComoChar = digitosComoCharArray[i];
+            if( ! Character.isDigit(digitoComoChar))
+            {
+                throw new IllegalArgumentException("Caracter " + digitoComoChar
+                    + " no es un digito");
+            }
+
+            int numero = Integer.parseInt(String.valueOf(digitoComoChar));
+            digitos[i] = numero;
+        }
+        return digitos;
+    }
+
+
+
 
      /**
      *
      * Metodo encargado de procesar la entrada que contiene el tamanioDigito del segmento
      * de los digitos y los digitos a imprimir
      *
-     * @param comando Entrada que contiene el tamanioDigito del segmento de los digito
+     * @param ordenDeImpresion Entrada que contiene el tamanioDigito del segmento de los digito
      * y el numero a imprimir
      * @param espacioEntreDigitos Espacio Entre digitos
      */  
-    public void procesar(String comando, int espacioEntreDigitos) {
+    public void imprimir(String ordenDeImpresion, int espacioEntreDigitos) {
         
         String[] parametros;
         
         int tamanioDigito;
 
-        if (!comando.contains(",")) {
-            throw new IllegalArgumentException("Cadena " + comando
+        if (!ordenDeImpresion.contains(",")) {
+            throw new IllegalArgumentException("Cadena " + ordenDeImpresion
                     + " no contiene caracter ,");
         }
         
         //Se hace el split de la cadena
-        parametros = comando.split(",");
+        parametros = ordenDeImpresion.split(",");
         
         //Valida la cantidad de parametros
         if(parametros.length>2)
         {
-           throw new IllegalArgumentException("Cadena " + comando
+           throw new IllegalArgumentException("Cadena " + ordenDeImpresion
                     + " contiene mas caracter ,"); 
         }
         
         //Valida la cantidad de parametros
         if(parametros.length<2)
         {
-           throw new IllegalArgumentException("Cadena " + comando
+           throw new IllegalArgumentException("Cadena " + ordenDeImpresion
                     + " no contiene los parametros requeridos"); 
         }
         
@@ -352,8 +365,10 @@ public class ImpresorLCD {
                     + "] no es un numero");
         }
 
-        // Realiza la impresion del numero
-        imprimirNumero(tamanioDigito, parametros[1],espacioEntreDigitos);
+        String digitosComoString = parametros[1];
+        int[] digitos = obtenerDigitos(digitosComoString);
+        // Realiza la impresion de los digitos
+        imprimirDigitos(tamanioDigito, digitos ,espacioEntreDigitos);
 
     }
 
