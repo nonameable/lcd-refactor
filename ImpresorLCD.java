@@ -17,8 +17,6 @@ public class ImpresorLCD {
     static final String POSICION_X = "X";
     static final String POSICION_Y = "Y";
 
-    // TODO code application logic here
-    //String entrada = JOptionPane.showInputDialog("Digite el numero");
     private int tamanioDigito;
 
     // Calcula el numero de filasDigito
@@ -277,8 +275,8 @@ public class ImpresorLCD {
             this.pf3[0] = (this.filasDigito - 1);
             this.pf3[1] = 0 + pivotX;
 
-            this.pf4[0] = (this.columnasDigito - 1);          // aqui estan invertidas las dimensiones
-            this.pf4[1] = (this.filasDigito / 2) + pivotX; // aqui estan invertidas las dimensiones
+            this.pf4[0] = (this.filasDigito / 2);
+            this.pf4[1] = (this.columnasDigito - 1) + pivotX;
 
             this.pf5[0] = 0;
             this.pf5[1] = (this.columnasDigito - 1) + pivotX;

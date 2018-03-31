@@ -35,3 +35,82 @@ Salida:
 |     |      | |     |       | |     |
 |_ _ _|      | |_ _ _|  _ _ _| |_ _ _|
 
+## Cambios en el refactoring
+
+
+### Convenciones y Lenguaje
+
+1. La mayoría del código está en español. Así es mejor ser consistente y dejar todo en español.
+
+2. Algunas variables no tienen nombres que faciliten la lectura y el entendimiento del código. Cambié algunos nombres por otros más representativos.
+
+Vale notar que todo esto debería estar sujeto a las convenciones y reglas del equipo en que se está trabajando.
+
+### Lógica
+
+1. La utilización de puntos fijos es una idea buena, sin embargo, las reglas para definir el punto fijo 4, aunque correctas, pueden llegar a confundir a alguien que lea el código. Actualmente el par de líneas que definen este punto son las siguientes:
+
+
+```java
+this.pf4[0] = (this.columnasDigito - 1);
+this.pf4[1] = (this.filasDigito / 2) + pivotX; 
+```
+
+Si se analiza la manera en que se definen los puntos fijos 1, 2, 3 y 5, la posición 0 de cada punto fijo está asociada con la posición en Y en la matriz. De manera similar, la posición 1 del array está asociada con la posición X. Esto se concluye porque la posición 0 es una función de las filasDigito y a su vez, la posición 1 una función de las columnasDigito. 
+
+Este patrón se rompe en la definición del punto fijo 4, pues la posición 0 es función de columnasDigito y la posición 1 es función de filasDigito. Este cambio, sin embargo, no impide que el programa funcione correctamente. ¿Por qué? Es por la definición misma de las variables. Nosotros definimos columnasDigito y filasDigito así:
+
+```java
+// Calcula el numero de filas cada digito
+this.filasDigito = (2 * this.tamanioDigito) + 3;
+
+// Calcula el numero de columna de cada digito
+this.columnasDigito = this.tamanioDigito + 2;
+```
+Si seguimos el patrón, la definición correcta de las posiciones del punto fijo 4 sería así:
+
+```java
+this.pf4[0] = (this.filasDigito / 2);
+this.pf4[1] = (this.columnasDigito - 1) + pivotX; 
+```
+
+Resulta que estas dos definiciones son equivalentes. Para esto se debe probar que 
+
+```java
+(this.filasDigito / 2)
+```
+
+es lo mismo que:
+
+```java
+(this.columnasDigito - 1);
+```
+
+y a su vez que:
+
+```java
+(this.columnasDigito - 1)
+```
+
+es lo mismo que:
+
+```java
+(2 * this.tamanioDigito)
+```
+
+Esto es bastante trivial, dada su definición inicial mencionada al comienzo de este README. Sólo es necesario entender la manera como Java trunca la división entre enteros. 
+
+Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfección, decidí cambiar la definición, para que cuando alguien lea el código no tenga la misma confusión que yo tuve. 
+
+
+
+
+
+
+
+
+
+
+
+
+
