@@ -34,7 +34,7 @@ Salida:
 |     |      | |     |       | |     |
 |     |      | |     |       | |     |
 |_ _ _|      | |_ _ _|  _ _ _| |_ _ _|
-
+</pre>
 ## Cambios en el refactoring
 
 
