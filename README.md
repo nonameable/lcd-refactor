@@ -12,6 +12,7 @@ Entre cada impresión debe haber una línea blanca.
  
 Ejemplo: 
 Entrada: 
+
 2,12345
 
 3,67890 

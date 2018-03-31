@@ -21,11 +21,11 @@ public class ImpresorLCD {
     //String entrada = JOptionPane.showInputDialog("Digite el numero");
     private int tamanioDigito;
 
-    // Calcula el numero de filasDig
-    private int filasDig;
-    private int columDig;
+    // Calcula el numero de filasDigito
+    private int filasDigito;
+    private int columnasDigito;
     private int totalFilas;
-    private int totalColum;
+    private int totalColumnas;
 
     public ImpresorLCD() {
         // Inicializa variables
@@ -126,83 +126,83 @@ public class ImpresorLCD {
     private void adicionarDigito(int numero) {
 
         // Establece los segmentos de cada numero
-        List<Integer> segList = new ArrayList<>();
+        List<Integer> segmentosNumero = new ArrayList<>();
 
         switch (numero) {
             case 1:
-                segList.add(3);
-                segList.add(4);
+                segmentosNumero.add(3);
+                segmentosNumero.add(4);
                 break;
             case 2:
-                segList.add(5);
-                segList.add(3);
-                segList.add(6);
-                segList.add(2);
-                segList.add(7);
+                segmentosNumero.add(5);
+                segmentosNumero.add(3);
+                segmentosNumero.add(6);
+                segmentosNumero.add(2);
+                segmentosNumero.add(7);
                 break;
             case 3:
-                segList.add(5);
-                segList.add(3);
-                segList.add(6);
-                segList.add(4);
-                segList.add(7);
+                segmentosNumero.add(5);
+                segmentosNumero.add(3);
+                segmentosNumero.add(6);
+                segmentosNumero.add(4);
+                segmentosNumero.add(7);
                 break;
             case 4:
-                segList.add(1);
-                segList.add(6);
-                segList.add(3);
-                segList.add(4);
+                segmentosNumero.add(1);
+                segmentosNumero.add(6);
+                segmentosNumero.add(3);
+                segmentosNumero.add(4);
                 break;
             case 5:
-                segList.add(5);
-                segList.add(1);
-                segList.add(6);
-                segList.add(4);
-                segList.add(7);
+                segmentosNumero.add(5);
+                segmentosNumero.add(1);
+                segmentosNumero.add(6);
+                segmentosNumero.add(4);
+                segmentosNumero.add(7);
                 break;
             case 6:
-                segList.add(5);
-                segList.add(1);
-                segList.add(6);
-                segList.add(2);
-                segList.add(7);
-                segList.add(4);
+                segmentosNumero.add(5);
+                segmentosNumero.add(1);
+                segmentosNumero.add(6);
+                segmentosNumero.add(2);
+                segmentosNumero.add(7);
+                segmentosNumero.add(4);
                 break;
             case 7:
-                segList.add(5);
-                segList.add(3);
-                segList.add(4);
+                segmentosNumero.add(5);
+                segmentosNumero.add(3);
+                segmentosNumero.add(4);
                 break;
             case 8:
-                segList.add(1);
-                segList.add(2);
-                segList.add(3);
-                segList.add(4);
-                segList.add(5);
-                segList.add(6);
-                segList.add(7);
+                segmentosNumero.add(1);
+                segmentosNumero.add(2);
+                segmentosNumero.add(3);
+                segmentosNumero.add(4);
+                segmentosNumero.add(5);
+                segmentosNumero.add(6);
+                segmentosNumero.add(7);
                 break;
             case 9:
-                segList.add(1);
-                segList.add(3);
-                segList.add(4);
-                segList.add(5);
-                segList.add(6);
-                segList.add(7);
+                segmentosNumero.add(1);
+                segmentosNumero.add(3);
+                segmentosNumero.add(4);
+                segmentosNumero.add(5);
+                segmentosNumero.add(6);
+                segmentosNumero.add(7);
                 break;
             case 0:
-                segList.add(1);
-                segList.add(2);
-                segList.add(3);
-                segList.add(4);
-                segList.add(5);
-                segList.add(7);
+                segmentosNumero.add(1);
+                segmentosNumero.add(2);
+                segmentosNumero.add(3);
+                segmentosNumero.add(4);
+                segmentosNumero.add(5);
+                segmentosNumero.add(7);
                 break;
             default:
                 break;
         }
 
-        Iterator<Integer> iterator = segList.iterator();
+        Iterator<Integer> iterator = segmentosNumero.iterator();
 
         while (iterator.hasNext()) {
             adicionarSegmento(iterator.next());
@@ -219,34 +219,38 @@ public class ImpresorLCD {
      */    
     private void imprimirNumero(int tamanioDigito, String numeroImp, int espacio) 
     {
+        // Variable que permite moverse en la dimension X de la matriz de impresion
         int pivotX = 0;
+        
         char[] digitos;
 
         this.tamanioDigito = tamanioDigito;
 
         // Calcula el numero de filas cada digito
-        this.filasDig = (2 * this.tamanioDigito) + 3;
+        this.filasDigito = (2 * this.tamanioDigito) + 3;
 
         // Calcula el numero de columna de cada digito
-        this.columDig = this.tamanioDigito + 2;
+        this.columnasDigito = this.tamanioDigito + 2;
 
         // Calcula el total de filas de la matriz en la que se almacenaran los digitos
-        this.totalFilas = this.filasDig;
+        this.totalFilas = this.filasDigito;
 
         // Calcula el total de columnas de la matriz en la que se almacenaran los digitos
-        this.totalColum = (this.columDig * numeroImp.length())
+        this.totalColumnas
+ = (this.columnasDigito * numeroImp.length())
                 + (espacio * numeroImp.length()); // deberia ser menos 1, a menos que queramos espacio despues del ultimo digito
 
         // crea matriz para almacenar los numero a imprimir
         this.matrizImpresion
- = new String[this.totalFilas][this.totalColum];
+ = new String[this.totalFilas][this.totalColumnas];
 
         // crea el arreglo de digitos
         digitos = numeroImp.toCharArray();
 
         // Inicializa matriz
         for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColum; j++) {
+            for (int j = 0; j < this.totalColumnas
+        ; j++) {
                 this.matrizImpresion
         [i][j] = " ";
             }
@@ -267,26 +271,27 @@ public class ImpresorLCD {
             this.pf1[0] = 0;
             this.pf1[1] = 0 + pivotX;
 
-            this.pf2[0] = (this.filasDig / 2);
+            this.pf2[0] = (this.filasDigito / 2);
             this.pf2[1] = 0 + pivotX;
 
-            this.pf3[0] = (this.filasDig - 1);
+            this.pf3[0] = (this.filasDigito - 1);
             this.pf3[1] = 0 + pivotX;
 
-            this.pf4[0] = (this.columDig - 1);          // aqui estan invertidas las dimensiones
-            this.pf4[1] = (this.filasDig / 2) + pivotX; // aqui estan invertidas las dimensiones
+            this.pf4[0] = (this.columnasDigito - 1);          // aqui estan invertidas las dimensiones
+            this.pf4[1] = (this.filasDigito / 2) + pivotX; // aqui estan invertidas las dimensiones
 
             this.pf5[0] = 0;
-            this.pf5[1] = (this.columDig - 1) + pivotX;
+            this.pf5[1] = (this.columnasDigito - 1) + pivotX;
 
-            pivotX = pivotX + this.columDig + espacio;
+            pivotX = pivotX + this.columnasDigito + espacio;
 
             adicionarDigito(numero);
         }
 
         // Imprime matriz
         for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColum; j++) {
+            for (int j = 0; j < this.totalColumnas
+        ; j++) {
                 System.out.print(this.matrizImpresion
             [i][j]);
             }
@@ -301,13 +306,13 @@ public class ImpresorLCD {
      *
      * @param comando Entrada que contiene el tamanioDigito del segmento de los digito
      * y el numero a imprimir
-     * @param espacioDig Espacio Entre digitos
+     * @param espacioEntreDigitos Espacio Entre digitos
      */  
-    public void procesar(String comando, int espacioDig) {
+    public void procesar(String comando, int espacioEntreDigitos) {
         
         String[] parametros;
         
-        int tam;
+        int tamanioDigito;
 
         if (!comando.contains(",")) {
             throw new IllegalArgumentException("Cadena " + comando
@@ -332,14 +337,14 @@ public class ImpresorLCD {
         }
         
         //Valida que el parametro tamanioDigito sea un numerico
-        if(isNumeric(parametros[0]))
+        if(esNumerico(parametros[0]))
         {
-            tam = Integer.parseInt(parametros[0]);
+            tamanioDigito = Integer.parseInt(parametros[0]);
             
             // se valida que el tamanioDigito este entre 1 y 10
-            if(tam <1 || tam >10)
+            if(tamanioDigito <1 || tamanioDigito >10)
             {
-                throw new IllegalArgumentException("El parametro tamanioDigito ["+tam
+                throw new IllegalArgumentException("El parametro tamanioDigito ["+tamanioDigito
                         + "] debe estar entre 1 y 10");
             }
         }
@@ -350,7 +355,7 @@ public class ImpresorLCD {
         }
 
         // Realiza la impresion del numero
-        imprimirNumero(tam, parametros[1],espacioDig);
+        imprimirNumero(tamanioDigito, parametros[1],espacioEntreDigitos);
 
     }
 
@@ -360,7 +365,7 @@ public class ImpresorLCD {
      *
      * @param cadena Cadena
      */  
-    static boolean isNumeric(String cadena) {
+    static boolean esNumerico(String cadena) {
         try {
             Integer.parseInt(cadena);
             return true;
