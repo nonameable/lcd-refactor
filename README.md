@@ -103,14 +103,18 @@ Esto es bastante trivial, dada su definición inicial mencionada al comienzo de 
 Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfección, decidí cambiar la definición, para que cuando alguien lea el código no tenga la misma confusión que yo tuve. 
 
 
-### Nuevas funciones
+### Funciones Nuevas
 
 1. Cambié el nombre de imprimirNumero a imprimirDigitos, pues esa es la responsabilidad de ese método. El nombre anterior era confuso, pues podría dar a entender que se estaba imprimiendo sólo uno de los digitos de toda la cadena.
 
 
 2. Creé el método `obtenerDigitos()` que permite obtener los dígitos a partir de un String particular, validando que todos los caracteres sean números. Esta conversión y verificación antes se hacia dentro de `imprimirDigitos()`, lo que implicaba que las responsabilidades de ese método eran muchas. Como este método se implementó, cambié los parámetros de entrada de imprimirDigitos(), para que le llegue un int array con los dígitos a imprimir. 
 
-3. Creé el Método que imprime en consola la matriz que entra por parametro. En caso de que la matriz no este inicializada, lanza `NullPointerException`. 
+3. Creé el Método que imprime en consola la matriz que entra por parametro. En caso de que la matriz no este inicializada, lanza `NullPointerException`.
+
+### Funciones viejas
+
+1. Dentro de la función `adicionarDigito()` estaba el código que escogía que segmentos pertenecían a cada número. Esto debe hacerse, sólo que considero no es responsabilidad de esta función. Decidí simplificarla y crear una nueva función `obtenerSegmentosPara()` que obtiene los segmentos de cada número. Estos están almacenados en un HashMap inicializado una vez se crea la impresora dentro del método `inicializarSegmentosPorNumero()`. Este método es llamado dentro del constructor de `ImpresorLCD`. Este método es largo y posiblemente podría reducirse en complejidad si pudiéramos meter los segmentos que definen a cada número dentro de un objeto externo accesible. **Por ahora lo dejo así.**
 
 ### Variables
 

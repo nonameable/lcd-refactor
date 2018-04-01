@@ -1,8 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public class ImpresorLCD {
+
+
+    // Mapa que contiene los segmentos por numero
+    private HashMap<Integer, ArrayList<Integer>> segmentosPorNumero;
 
     // Puntos fijos
     private final int[] pf1;
@@ -29,6 +34,12 @@ public class ImpresorLCD {
     private int espacioEntreDigitos;
 
     public ImpresorLCD() {
+
+        // inicializar segmentosPorNumero
+
+        inicializarSegmentosPorNumero();
+
+
         // Inicializa variables
         pf1 = new int[2];
         pf2 = new int[2];
@@ -36,6 +47,97 @@ public class ImpresorLCD {
         pf4 = new int[2];
         pf5 = new int[2];
     }
+
+    /**
+     *
+     * Metodo encargado de inicializar segmentosPorNumero y llenarlo con los segmentos
+     * de cada uno de los 10 digitos: 0 1 2 3 4 5 6 7 8 9
+     */    
+    private void inicializarSegmentosPorNumero() {
+        segmentosPorNumero = new HashMap<>();
+
+        ArrayList<Integer> segmentos = new ArrayList<>();
+        segmentos.add(1);
+        segmentos.add(2);
+        segmentos.add(3);
+        segmentos.add(4);
+        segmentos.add(5);
+        segmentos.add(7);
+        segmentosPorNumero.put(0, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(3);
+        segmentos.add(4);
+        segmentosPorNumero.put(1, segmentos);
+        
+        segmentos = new ArrayList<>();
+        segmentos.add(5);
+        segmentos.add(3);
+        segmentos.add(6);
+        segmentos.add(2);
+        segmentos.add(7);
+        segmentosPorNumero.put(2, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(5);
+        segmentos.add(3);
+        segmentos.add(6);
+        segmentos.add(4);
+        segmentos.add(7);
+        segmentosPorNumero.put(3, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(1);
+        segmentos.add(6);
+        segmentos.add(3);
+        segmentos.add(4);
+        segmentosPorNumero.put(4, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(5);
+        segmentos.add(1);
+        segmentos.add(6);
+        segmentos.add(4);
+        segmentos.add(7);
+        segmentosPorNumero.put(5, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(5);
+        segmentos.add(1);
+        segmentos.add(6);
+        segmentos.add(2);
+        segmentos.add(7);
+        segmentos.add(4);
+        segmentosPorNumero.put(6, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(5);
+        segmentos.add(3);
+        segmentos.add(4);
+        segmentosPorNumero.put(7, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(1);
+        segmentos.add(2);
+        segmentos.add(3);
+        segmentos.add(4);
+        segmentos.add(5);
+        segmentos.add(6);
+        segmentos.add(7);
+        segmentosPorNumero.put(8, segmentos);
+
+        segmentos = new ArrayList<>();
+        segmentos.add(1);
+        segmentos.add(3);
+        segmentos.add(4);
+        segmentos.add(5);
+        segmentos.add(6);
+        segmentos.add(7);
+        segmentosPorNumero.put(9, segmentos);
+    }
+
+
+
 
     /**
      *
@@ -63,6 +165,18 @@ public class ImpresorLCD {
                 + (espacioEntreDigitos * numeroDigitos)); 
         this.totalColumnas = totalColumnas;
 
+    }
+
+    /**
+     *
+     * Metodo que retorna los segmentos asociados a un numero que entra por parametro
+     * @param numero numero del cual se quieren obtener los segmentos
+     */    
+    private ArrayList<Integer> obtenerSegmentosPara(int numero) {
+
+        Integer i = new Integer(numero);
+        ArrayList<Integer> segmentos = segmentosPorNumero.get(i);
+        return segmentos;
     }
 
 
@@ -143,83 +257,15 @@ public class ImpresorLCD {
     private void adicionarDigito(int numero) {
 
         // Establece los segmentos de cada numero
-        List<Integer> segmentosNumero = new ArrayList<>();
+        List<Integer> segmentos = new ArrayList<>();
 
-        switch (numero) {
-            case 1:
-                segmentosNumero.add(3);
-                segmentosNumero.add(4);
-                break;
-            case 2:
-                segmentosNumero.add(5);
-                segmentosNumero.add(3);
-                segmentosNumero.add(6);
-                segmentosNumero.add(2);
-                segmentosNumero.add(7);
-                break;
-            case 3:
-                segmentosNumero.add(5);
-                segmentosNumero.add(3);
-                segmentosNumero.add(6);
-                segmentosNumero.add(4);
-                segmentosNumero.add(7);
-                break;
-            case 4:
-                segmentosNumero.add(1);
-                segmentosNumero.add(6);
-                segmentosNumero.add(3);
-                segmentosNumero.add(4);
-                break;
-            case 5:
-                segmentosNumero.add(5);
-                segmentosNumero.add(1);
-                segmentosNumero.add(6);
-                segmentosNumero.add(4);
-                segmentosNumero.add(7);
-                break;
-            case 6:
-                segmentosNumero.add(5);
-                segmentosNumero.add(1);
-                segmentosNumero.add(6);
-                segmentosNumero.add(2);
-                segmentosNumero.add(7);
-                segmentosNumero.add(4);
-                break;
-            case 7:
-                segmentosNumero.add(5);
-                segmentosNumero.add(3);
-                segmentosNumero.add(4);
-                break;
-            case 8:
-                segmentosNumero.add(1);
-                segmentosNumero.add(2);
-                segmentosNumero.add(3);
-                segmentosNumero.add(4);
-                segmentosNumero.add(5);
-                segmentosNumero.add(6);
-                segmentosNumero.add(7);
-                break;
-            case 9:
-                segmentosNumero.add(1);
-                segmentosNumero.add(3);
-                segmentosNumero.add(4);
-                segmentosNumero.add(5);
-                segmentosNumero.add(6);
-                segmentosNumero.add(7);
-                break;
-            case 0:
-                segmentosNumero.add(1);
-                segmentosNumero.add(2);
-                segmentosNumero.add(3);
-                segmentosNumero.add(4);
-                segmentosNumero.add(5);
-                segmentosNumero.add(7);
-                break;
-            default:
-                break;
-        }
+        segmentos = obtenerSegmentosPara(numero);
+        System.out.println("---------------");
+        System.out.println(segmentos);
+        System.out.println("---------------");
 
-        Iterator<Integer> iterator = segmentosNumero.iterator();
+
+        Iterator<Integer> iterator = segmentos.iterator();
 
         while (iterator.hasNext()) {
             adicionarSegmento(iterator.next());
