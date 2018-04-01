@@ -24,7 +24,7 @@ public class ImpresorLCD {
 
     public ImpresorLCD() {
 
-        // inicializar segmentosPorNumero
+        // inicializar diccionarioSegmentos
         diccionarioSegmentos = new DiccionarioSegmentos();
     }
 
@@ -32,6 +32,9 @@ public class ImpresorLCD {
      *
      * Metodo encargado de inicializar las variables de estado de la impresion con los valores
      * dados por el usuario
+     * @param tamanioDigito tamanio de cada digito para la impresion
+     * @param numeroDigitos numero de digitos a imprimir en la impresion
+     * @param espacioEntreDigitos espacio que debe existir entre los digitos
      */    
     private void inicializarImpresion(int tamanioDigito, int numeroDigitos, int espacioEntreDigitos) {
 
@@ -72,7 +75,6 @@ public class ImpresorLCD {
      * Metodo encargado de añadir una linea a la matriz de Impresion
      * @param punto Punto Pivote
      * @param posFija Posicion Fija
-     * @param tamanioDigito Tamaño Segmento
      * @param caracter Caracter Segmento
      */    
     private void adicionarLinea(int[] punto, String posFija, String caracter) {
@@ -96,12 +98,8 @@ public class ImpresorLCD {
     }
 
     /**
-     *
-     * Metodo encargado de un segmento a la matriz de Impresion
-     *
+     * Metodo encargado de un segmento a la matriz de Impresion     *
      * @param segmento Segmento a adicionar
-     * @param tamanioDigito Tamanio del digito especificado por el usuario para la impresion
-     * @param matrizImpresion   Matriz donde se va a adicionar el segmento
      */  
     private void adicionarSegmento(int segmento) {
         switch (segmento) {
@@ -174,7 +172,7 @@ public class ImpresorLCD {
      * En caso de que alguno de los caracteres del String no sea un digito,
      * lanza una IllegalArgumentException. 
      *
-     * @param String que contiene la cadena de digitos
+     * @param digitosComoString String que contiene la cadena de digitos
      */
     private int[] obtenerDigitos(String digitosComoString) throws IllegalArgumentException{
         // Obtiene la cadena de digitos a imprimir
@@ -201,7 +199,7 @@ public class ImpresorLCD {
     /**
      * Método que imprime en consola la matriz que entra por parametro. En caso de que la matriz
      * no este inicializada, lanza NullPointerException
-     * @param String[][] con la matriz de strings que se quiere imprimir
+     * @param matriz String[][] con la matriz de strings que se quiere imprimir
      */
     private void imprimirMatriz(String[][] matriz){
         
@@ -222,9 +220,6 @@ public class ImpresorLCD {
 
     /**
      * Método que construye una matriz de strings para llenar luego con los simbolos que representaran digtos
-     * @param tamanioDigito
-     * @param numeroDigitos
-     * @param espacioEntreDigitos
      */
     private void construirMatrizVacia(){
         
