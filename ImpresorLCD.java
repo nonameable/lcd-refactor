@@ -10,49 +10,80 @@ public class ImpresorLCD {
     private final int[] pf3;
     private final int[] pf4;
     private final int[] pf5;
-    private String[][] matrizImpresion;
 
     static final String CARACTER_VERTICAL = "|";
     static final String CARACTER_HORIZONTAL = "-";
     static final String POSICION_X = "X";
     static final String POSICION_Y = "Y";
 
-    private int tamanioDigito;
+    // matriz de impresion. Sera un lienzo sobre el cual se escribiran los caracteres horizontales y veticales
+    private String[][] matrizImpresion;
 
-    // Calcula el numero de filasDigito
+    // Variables de estado que son parametros de la impresion actual
+    // Cada vez que se llame el metodo Imprimir de Nuevo, se inicializan con los nuevos valores correspondientes
     private int filasDigito;
     private int columnasDigito;
     private int totalFilas;
     private int totalColumnas;
+    private int tamanioDigito;
+    private int espacioEntreDigitos;
 
     public ImpresorLCD() {
         // Inicializa variables
-        this.pf1 = new int[2];
-        this.pf2 = new int[2];
-        this.pf3 = new int[2];
-        this.pf4 = new int[2];
-        this.pf5 = new int[2];
+        pf1 = new int[2];
+        pf2 = new int[2];
+        pf3 = new int[2];
+        pf4 = new int[2];
+        pf5 = new int[2];
     }
 
     /**
      *
-     * Metodo encargado de añadir una linea a la matriz de Impresion
+     * Metodo encargado de inicializar las variables de estado de la impresion con los valores
+     * dados por el usuario
+     */    
+    private void inicializarParametrosDeImpresion(int tamanioDigito, int numeroDigitos, int espacioEntreDigitos) {
+        this.tamanioDigito = tamanioDigito;
+        this.espacioEntreDigitos = espacioEntreDigitos;
+
+        // Calcula el numero de filas cada digito
+        int filasDigito = (2 * tamanioDigito) + 3;
+        this.filasDigito = filasDigito;
+
+        // Calcula el numero de columna de cada digito
+        int columnasDigito = tamanioDigito + 2;
+        this.columnasDigito = columnasDigito;
+
+        // Calcula el total de filas de la matriz en la que se almacenaran los digitos
+        int totalFilas = filasDigito;
+        this.totalFilas = totalFilas;
+
+        // Calcula el total de columnas de la matriz en la que se almacenaran los digitos
+        int totalColumnas = (columnasDigito * numeroDigitos
+                + (espacioEntreDigitos * numeroDigitos)); 
+        this.totalColumnas = totalColumnas;
+
+    }
+
+
+
+
+    /**
      *
-     * @param matriz Matriz Impresion
+     * Metodo encargado de añadir una linea a la matriz de Impresion
      * @param punto Punto Pivote
      * @param posFija Posicion Fija
      * @param tamanioDigito Tamaño Segmento
      * @param caracter Caracter Segmento
      */    
-    private void adicionarLinea(String[][] matriz, int[] punto, String posFija,
-            int tamanioDigito, String caracter) {
+    private void adicionarLinea(int[] punto, String posFija, String caracter) {
 
         if (posFija.equalsIgnoreCase(POSICION_X)) 
         {
             for (int y = 1; y <= tamanioDigito; y++) 
             {
                 int valor = punto[1] + y; // mal nombre , valor no es bueno
-                matriz[punto[0]][valor] = caracter;
+                matrizImpresion[punto[0]][valor] = caracter;
             }
         } 
         else 
@@ -60,7 +91,7 @@ public class ImpresorLCD {
             for (int i = 1; i <= tamanioDigito; i++) 
             {
                 int valor = punto[0] + i;
-                matriz[valor][punto[1]] = caracter;
+                matrizImpresion[valor][punto[1]] = caracter;
             }
         }
     }
@@ -70,44 +101,32 @@ public class ImpresorLCD {
      * Metodo encargado de un segmento a la matriz de Impresion
      *
      * @param segmento Segmento a adicionar
+     * @param tamanioDigito Tamanio del digito especificado por el usuario para la impresion
+     * @param matrizImpresion   Matriz donde se va a adicionar el segmento
      */  
     private void adicionarSegmento(int segmento) {
 
         switch (segmento) {
             case 1:
-                adicionarLinea(this.matrizImpresion
-            , this.pf1, POSICION_Y,
-                        this.tamanioDigito, CARACTER_VERTICAL);
+                adicionarLinea(pf1, POSICION_Y, CARACTER_VERTICAL);
                 break;
             case 2:
-                adicionarLinea(this.matrizImpresion
-            , this.pf2, POSICION_Y,
-                        this.tamanioDigito, CARACTER_VERTICAL);
+                adicionarLinea(pf2, POSICION_Y, CARACTER_VERTICAL);
                 break;
             case 3:
-                adicionarLinea(this.matrizImpresion
-            , this.pf5, POSICION_Y,
-                        this.tamanioDigito, CARACTER_VERTICAL);
+                adicionarLinea(pf5, POSICION_Y, CARACTER_VERTICAL);
                 break;
             case 4:
-                adicionarLinea(this.matrizImpresion
-            , this.pf4, POSICION_Y,
-                        this.tamanioDigito, CARACTER_VERTICAL);
+                adicionarLinea(pf4, POSICION_Y, CARACTER_VERTICAL);
                 break;
             case 5:
-                adicionarLinea(this.matrizImpresion
-            , this.pf1, POSICION_X,
-                        this.tamanioDigito, CARACTER_HORIZONTAL);
+                adicionarLinea(pf1, POSICION_X, CARACTER_HORIZONTAL);
                 break;
             case 6:
-                adicionarLinea(this.matrizImpresion
-            , this.pf2, POSICION_X,
-                        this.tamanioDigito, CARACTER_HORIZONTAL);
+                adicionarLinea(pf2, POSICION_X, CARACTER_HORIZONTAL);
                 break;
             case 7:
-                adicionarLinea(this.matrizImpresion
-            , this.pf3, POSICION_X,
-                        this.tamanioDigito, CARACTER_HORIZONTAL);
+                adicionarLinea(pf3, POSICION_X,CARACTER_HORIZONTAL);
                 break;
             default:
                 break;
@@ -209,76 +228,42 @@ public class ImpresorLCD {
 
     /**
      *
-     * Metodo encargado de imprimir los digitos
-     *
-     * @param tamanioDigito Tamaño Segmento Digitos
+     * Metodo encargado de insertar los digitos en la matriz lienzo
+     * Esto lo hara llenando la matriz con simbolos "-" y "|" que representaran los digitos
      * @param int[] digitos array con los digitos a a Imprimir
-     * @param espacio Espacio Entre digitos
      */    
-    private void imprimirDigitos(int tamanioDigito, int[] digitos, int espacio) 
+    private void insertarDigitosEnMatriz(int[] digitos) 
     {
         // Variable que permite moverse en la dimension X de la matriz de impresion
         int pivotX = 0;
-        
-        this.tamanioDigito = tamanioDigito;
-
-        // Calcula el numero de filas cada digito
-        this.filasDigito = (2 * this.tamanioDigito) + 3;
-
-        // Calcula el numero de columna de cada digito
-        this.columnasDigito = this.tamanioDigito + 2;
-
-        // Calcula el total de filas de la matriz en la que se almacenaran los digitos
-        this.totalFilas = this.filasDigito;
-
-        // Calcula el total de columnas de la matriz en la que se almacenaran los digitos
-        this.totalColumnas = (this.columnasDigito * digitos.length
-                + (espacio * digitos.length)); 
-        // crea matriz para almacenar los numero a imprimir
-        this.matrizImpresion = new String[this.totalFilas][this.totalColumnas];
-
-        // Inicializa matriz
-        for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColumnas; j++) {
-                this.matrizImpresion[i][j] = " ";
-            }
-        }
 
         for (int digito : digitos) {
             
             //Calcula puntos fijos
-            this.pf1[0] = 0;
-            this.pf1[1] = 0 + pivotX;
+            pf1[0] = 0;
+            pf1[1] = 0 + pivotX;
 
-            this.pf2[0] = (this.filasDigito / 2);
-            this.pf2[1] = 0 + pivotX;
+            pf2[0] = (filasDigito / 2);
+            pf2[1] = 0 + pivotX;
 
-            this.pf3[0] = (this.filasDigito - 1);
-            this.pf3[1] = 0 + pivotX;
+            pf3[0] = (filasDigito - 1);
+            pf3[1] = 0 + pivotX;
 
-            this.pf4[0] = (this.filasDigito / 2);
-            this.pf4[1] = (this.columnasDigito - 1) + pivotX;
+            pf4[0] = (filasDigito / 2);
+            pf4[1] = (columnasDigito - 1) + pivotX;
 
-            this.pf5[0] = 0;
-            this.pf5[1] = (this.columnasDigito - 1) + pivotX;
+            pf5[0] = 0;
+            pf5[1] = (this.columnasDigito - 1) + pivotX;
 
-            pivotX = pivotX + this.columnasDigito + espacio;
+            pivotX = pivotX + columnasDigito + espacioEntreDigitos;
 
             adicionarDigito(digito);
         }
 
-        // Imprime matriz
-        for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColumnas
-        ; j++) {
-                System.out.print(this.matrizImpresion[i][j]);
-            }
-            System.out.println();
-        }
     }
 
 
-      /**
+    /**
      *
      * Metodo que retorna un int array con los digitos contenidos en un String.
      * En caso de que alguno de los caracteres del String no sea un digito,
@@ -308,6 +293,50 @@ public class ImpresorLCD {
     }
 
 
+    /**
+     * Método que imprime en consola la matriz que entra por parametro. En caso de que la matriz
+     * no este inicializada, lanza NullPointerException
+     * @param String[][] con la matriz de strings que se quiere imprimir
+     */
+    private void imprimirMatriz(String[][] matriz){
+        
+        if( matriz != null){
+            // Imprime matriz
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[i].length; j++) {
+                    System.out.print(matriz[i][j]);
+                }
+                System.out.println();
+            }
+        }
+        else {
+            throw new NullPointerException("La matriz aún no ha sido inicializada");
+        }
+        
+    }
+
+    /**
+     * Método que construye una matriz de strings para llenar luego con los simbolos que representaran digtos
+     * @param tamanioDigito
+     * @param numeroDigitos
+     * @param espacioEntreDigitos
+     */
+    private void construirMatrizVacia(){
+        
+        
+        // crea matriz para almacenar los numero a imprimir
+        String[][] matrizImpresion = new String[totalFilas][totalColumnas];
+
+        // Inicializa matriz
+        for (int i = 0; i < totalFilas; i++) {
+            for (int j = 0; j < totalColumnas; j++) {
+                matrizImpresion[i][j] = " ";
+            }
+        }
+
+        this.matrizImpresion = matrizImpresion;
+        
+    }
 
 
      /**
@@ -367,8 +396,20 @@ public class ImpresorLCD {
 
         String digitosComoString = parametros[1];
         int[] digitos = obtenerDigitos(digitosComoString);
+
+
+        // Inicializacion de parametros para la orden de impresion correspondiente
+        inicializarParametrosDeImpresion(tamanioDigito, digitos.length, espacioEntreDigitos);
+
+        // construimos la matriz lienzo vacia para luego llenarla con los caracteres verticales y horizaontales
+        construirMatrizVacia();
+        
+        // Insertamos los digitos en la matriz lienzo donde se pondran los simbolos "-" y "|"
+        insertarDigitosEnMatriz(digitos);
+
         // Realiza la impresion de los digitos
-        imprimirDigitos(tamanioDigito, digitos ,espacioEntreDigitos);
+        imprimirMatriz(matrizImpresion);
+
 
     }
 
