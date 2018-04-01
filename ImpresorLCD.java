@@ -6,8 +6,8 @@ import java.util.List;
 public class ImpresorLCD {
 
 
-    // Mapa que contiene los segmentos por numero
-    private HashMap<Integer, ArrayList<Integer>> segmentosPorNumero;
+    // Objeto diccionario que contiene los segmentos para cada numero
+    private DiccionarioSegmentos diccionarioSegmentos;
 
     // Puntos fijos
     private final int[] pf1;
@@ -16,10 +16,10 @@ public class ImpresorLCD {
     private final int[] pf4;
     private final int[] pf5;
 
-    static final String CARACTER_VERTICAL = "|";
-    static final String CARACTER_HORIZONTAL = "-";
-    static final String POSICION_X = "X";
-    static final String POSICION_Y = "Y";
+    private static final String CARACTER_VERTICAL = "|";
+    private static final String CARACTER_HORIZONTAL = "-";
+    private static final String POSICION_X = "X";
+    private static final String POSICION_Y = "Y";
 
     // matriz de impresion. Sera un lienzo sobre el cual se escribiran los caracteres horizontales y veticales
     private String[][] matrizImpresion;
@@ -36,9 +36,7 @@ public class ImpresorLCD {
     public ImpresorLCD() {
 
         // inicializar segmentosPorNumero
-
-        inicializarSegmentosPorNumero();
-
+        diccionarioSegmentos = new DiccionarioSegmentos();
 
         // Inicializa variables
         pf1 = new int[2];
@@ -47,95 +45,6 @@ public class ImpresorLCD {
         pf4 = new int[2];
         pf5 = new int[2];
     }
-
-    /**
-     *
-     * Metodo encargado de inicializar segmentosPorNumero y llenarlo con los segmentos
-     * de cada uno de los 10 digitos: 0 1 2 3 4 5 6 7 8 9
-     */    
-    private void inicializarSegmentosPorNumero() {
-        segmentosPorNumero = new HashMap<>();
-
-        ArrayList<Integer> segmentos = new ArrayList<>();
-        segmentos.add(1);
-        segmentos.add(2);
-        segmentos.add(3);
-        segmentos.add(4);
-        segmentos.add(5);
-        segmentos.add(7);
-        segmentosPorNumero.put(0, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(3);
-        segmentos.add(4);
-        segmentosPorNumero.put(1, segmentos);
-        
-        segmentos = new ArrayList<>();
-        segmentos.add(5);
-        segmentos.add(3);
-        segmentos.add(6);
-        segmentos.add(2);
-        segmentos.add(7);
-        segmentosPorNumero.put(2, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(5);
-        segmentos.add(3);
-        segmentos.add(6);
-        segmentos.add(4);
-        segmentos.add(7);
-        segmentosPorNumero.put(3, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(1);
-        segmentos.add(6);
-        segmentos.add(3);
-        segmentos.add(4);
-        segmentosPorNumero.put(4, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(5);
-        segmentos.add(1);
-        segmentos.add(6);
-        segmentos.add(4);
-        segmentos.add(7);
-        segmentosPorNumero.put(5, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(5);
-        segmentos.add(1);
-        segmentos.add(6);
-        segmentos.add(2);
-        segmentos.add(7);
-        segmentos.add(4);
-        segmentosPorNumero.put(6, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(5);
-        segmentos.add(3);
-        segmentos.add(4);
-        segmentosPorNumero.put(7, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(1);
-        segmentos.add(2);
-        segmentos.add(3);
-        segmentos.add(4);
-        segmentos.add(5);
-        segmentos.add(6);
-        segmentos.add(7);
-        segmentosPorNumero.put(8, segmentos);
-
-        segmentos = new ArrayList<>();
-        segmentos.add(1);
-        segmentos.add(3);
-        segmentos.add(4);
-        segmentos.add(5);
-        segmentos.add(6);
-        segmentos.add(7);
-        segmentosPorNumero.put(9, segmentos);
-    }
-
 
 
 
@@ -175,7 +84,7 @@ public class ImpresorLCD {
     private ArrayList<Integer> obtenerSegmentosPara(int numero) {
 
         Integer i = new Integer(numero);
-        ArrayList<Integer> segmentos = segmentosPorNumero.get(i);
+        ArrayList<Integer> segmentos = diccionarioSegmentos.darSegmentosPara(i);
         return segmentos;
     }
 

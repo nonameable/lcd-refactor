@@ -114,7 +114,7 @@ Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfecci
 
 ### Funciones viejas
 
-1. Dentro de la función `adicionarDigito()` estaba el código que escogía que segmentos pertenecían a cada número. Esto debe hacerse, sólo que considero no es responsabilidad de esta función. Decidí simplificarla y crear una nueva función `obtenerSegmentosPara()` que obtiene los segmentos de cada número. Estos están almacenados en un HashMap inicializado una vez se crea la impresora dentro del método `inicializarSegmentosPorNumero()`. Este método es llamado dentro del constructor de `ImpresorLCD`. Este método es largo y posiblemente podría reducirse en complejidad si pudiéramos meter los segmentos que definen a cada número dentro de un objeto externo accesible. **Por ahora lo dejo así.**
+1. Dentro de la función `adicionarDigito()` estaba el código que escogía que segmentos pertenecían a cada número. Esto debe hacerse, sólo que considero no es responsabilidad de esta función. Decidí simplificarla y crear una nueva función `obtenerSegmentosPara()` que obtiene los segmentos de cada número. Estos están almacenados en un objeto externo que funciona como un diccionario de los segmentos para cada número.
 
 ### Variables
 
