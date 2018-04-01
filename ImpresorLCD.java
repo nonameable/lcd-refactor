@@ -160,7 +160,7 @@ public class ImpresorLCD {
         // Variable que permite moverse en la dimension X de la matriz de impresion
         for (int digito : digitos) {
             adicionarDigito(digito);
-            impresion.incrementarPivotX();         
+            impresion.moverPivotX();         
         }
 
     }

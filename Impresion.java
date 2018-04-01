@@ -1,15 +1,11 @@
 
 /**
-*
+* Clase que define a una impresion particular
 * Cada vez que se llame el metodo Imprimir de Nuevo, se crea una nueva instancia de la clase impresion
 * y se utiliza para imprimir
 */
 
 public class Impresion {
-
-
-	// 
-	// 
 
 	// Variables de estado que son parametros de la impresion
 	private int filasDigito;
@@ -43,10 +39,6 @@ public class Impresion {
 
 	   	// Inicializa puntos fijos y los calcula
     	inicializarPuntosFijos();
-        
-
-        
-
     }
 
     public void inicializarPuntosFijos(){
@@ -55,6 +47,7 @@ public class Impresion {
         pf3Inicial = new int[2];
         pf4Inicial = new int[2];
         pf5Inicial = new int[2];
+        
         // calcula puntos fijos
         pf1Inicial[0] = 0;
         pf1Inicial[1] = 0 + pivotX;
@@ -74,33 +67,65 @@ public class Impresion {
     }
 
 
+
+    /**
+     *
+     * Metodo que retorna las filas que ocupa un digito
+     */  
     public int darFilasDigito(){
     	return filasDigito;
     }
 
+    /**
+     *
+     * Metodo que retorna las columnas que ocupa un digito
+     */
     public int darColumnasDigito(){
     	return columnasDigito;
     }
 
+    /**
+     *
+     * Metodo que retorna las filas necesarias para la impresion
+     */
     public int darTotalFilas(){
     	return totalFilas;
     }
 
+    /**
+     *
+     * Metodo que retorna las columnas necesarias para la impresion
+     */
     public int darTotalColumnas(){
     	return totalColumnas;
     }
 
+
+    /**
+     *
+     * Metodo que retorna el tamanio de un digito. Este es un parametro ingresado por el usuario
+     */
     public int darTamanioDigito(){
     	return tamanioDigito;
     }
    
+    /**
+     *
+     * Metodo que retorna el espacio que deberia haber entre los digitos en la impresion
+     * Este es un parametro ingresado por el usuario
+     */
     public int darEspacioEntreDigitos(){
     	return espacioEntreDigitos;
     }
 
 
-
-    public void incrementarPivotX(){
+    /**
+     *
+     * Metodo que mueve pivotX a lo largo de la dirección X incrementando su valor.
+     * Esto lo hace en función de las columnas que ocupa un digito y el espacio que debe existir
+     * entre cada par de digitos
+     */
+    public void moverPivotX(){
     	pivotX = pivotX + columnasDigito + espacioEntreDigitos;
     }
 

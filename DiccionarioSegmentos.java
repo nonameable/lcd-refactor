@@ -5,11 +5,20 @@ import java.util.HashMap;
 public class DiccionarioSegmentos {
 	
 	private HashMap<Integer, ArrayList<Integer>> segmentosPorNumero;
-	
+
+	/**
+     *
+     * Constructor de la clase DiccionarioSegmento
+     */
 	public DiccionarioSegmentos(){
 		definirSegmentos();
 	}
 
+
+	/**
+     *
+     * Metodo que define los segmentos para cada posible dígito [1,2,3,4,5,6,7,8,9,0].
+     */
 	private void  definirSegmentos() {
 		segmentosPorNumero = new HashMap<>();
 
@@ -93,8 +102,18 @@ public class DiccionarioSegmentos {
 		segmentosPorNumero.put(9, segmentos);
 	}
 	
-	public ArrayList<Integer> darSegmentosPara(int digito) {
-		return segmentosPorNumero.get(digito);
+	/**
+     *
+     * Metodo que retorna los segmentos necesarios para insertar un digito en la matriz lienzo.
+     * @return los segmentos correspondientes dentro de un ArrayList.
+     */
+	public ArrayList<Integer> darSegmentosPara(int digito) throws IllegalArgumentException{
+		
+		ArrayList<Integer> segmentos = segmentosPorNumero.get(digito);
+		if(segmentos == null){
+			throw new IllegalArgumentException("El numero ingresado no es un digito");
+		}
+		return segmentos;
 	}
 
 }
