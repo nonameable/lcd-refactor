@@ -35,6 +35,23 @@ Salida:
 |     |      | |     |       | |     |
 |_ _ _|      | |_ _ _|  _ _ _| |_ _ _|
 </pre>
+
+
+
+
+## Testing
+
+Como no especificaron cómo querían incluir los tests, me abstuve de asumir que los iban a correr con Maven o Gradle. Teniendo esto en cuenta, decidí incluir las librerías necesarias para correr los tests en el repositorio `junit-4.12.jar` y `hamcrest-core-1.3.jar`. Estas librerías se encuentran en la carpeta /testing_libraries. Entonces, para correr las pruebas automáticas, ubicarse en el directorio raíz del repositorio y seguir los siquientes pasos:
+
+Compilar las clases donde están los tests:
+
+`javac -d ./tests/ -cp ./testing_libraries/junit-4.12.jar ./tests/*.java`
+
+Correr los tests:
+
+`java -cp ./tests/:./testing_libraries/:./testing_libraries/ org.junit.runner.JUnitCore TestJunit`
+
+
 ## Cambios en el refactoring
 
 
@@ -110,7 +127,8 @@ Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfecci
 
 1. Creé la clase `Utilidades` que por ahora sólo contiene el metodo `esNumerico()`.
 
-2. Creé la clase `DiccionarioSegmentos` que sirve como diccionario para obtener los segmentos que constituyen cada dígito posible.
+2. Creé la clase `DiccionarioSegmentos` que sirve como diccionario para obtener los segmentos que constituyen cada dígito posible.Esta clase podría ser más limpia si pudiéramos cargar los segmentos de cada número de un archivo de texto o similar. Por ahora, los segmentos de cada número están "hardcoded" en el código.
+
 
 3. Creé la clase `Impresion` que encapsula las propiedades de la impresión actual en un objeto. Estas variables antes estaban como atributos de la impresora. Una explicación más detallada de esta decisión se encuentra abajo. 
 
