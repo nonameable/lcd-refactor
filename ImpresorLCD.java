@@ -332,7 +332,7 @@ public class ImpresorLCD {
         }
         
         //Valida que el parametro tamanioDigito sea un numerico
-        if(esNumerico(parametros[0]))
+        if(Utilidades.esNumerico(parametros[0]))
         {
             tamanioDigito = Integer.parseInt(parametros[0]);
             
@@ -368,19 +368,5 @@ public class ImpresorLCD {
 
     }
 
-    /**
-     *
-     * Metodo encargado de validar si una cadena es numerica
-     *
-     * @param cadena Cadena
-     */  
-    static boolean esNumerico(String cadena) {
-        try {
-            Integer.parseInt(cadena);
-            return true;
-        } catch (NumberFormatException ex) {
-            return false;
-        }
-    }
-
+    
 }

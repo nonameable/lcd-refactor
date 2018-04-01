@@ -103,6 +103,12 @@ Esto es bastante trivial, dada su definición inicial mencionada al comienzo de 
 Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfección, decidí cambiar la definición, para que cuando alguien lea el código no tenga la misma confusión que yo tuve. 
 
 
+### Clases nuevas
+
+1. Cree la clase Utilidades que por ahora sólo contiene el metodo esNumerico
+2. Cree la clase DiccionarioSegmentos que sirve como diccionario para obtener los segmentos que constituyen cada dígito posible.
+
+
 ### Funciones Nuevas
 
 1. Cambié el nombre de imprimirNumero a imprimirDigitos, pues esa es la responsabilidad de ese método. El nombre anterior era confuso, pues podría dar a entender que se estaba imprimiendo sólo uno de los digitos de toda la cadena.
@@ -114,7 +120,7 @@ Ahora, como el patrón no se rompe y el programa sigue funcionando a la perfecci
 
 ### Funciones viejas
 
-1. Dentro de la función `adicionarDigito()` estaba el código que escogía que segmentos pertenecían a cada número. Esto debe hacerse, sólo que considero no es responsabilidad de esta función. Decidí simplificarla y crear una nueva función `obtenerSegmentosPara()` que obtiene los segmentos de cada número. Estos están almacenados en un objeto externo que funciona como un diccionario de los segmentos para cada número.
+1. Dentro de la función `adicionarDigito()` estaba el código que escogía que segmentos pertenecían a cada número. Esto debe hacerse, sólo que considero no es responsabilidad de esta función. Decidí simplificarla y crear una nueva función `obtenerSegmentosPara()` que obtiene los segmentos de cada número. Estos están almacenados en un objeto externo que funciona como un diccionario de los segmentos para cada número. Esto nos permite tener una mejor distribución de responsabilidades entre las clases. Sería bueno que el método con el que se obtienen los números fuera estático para que pudiera llamarse sin necesidad de instanciar la clase en ImpresorLCD. Esto, sin embargo, haría que fuera necesario llamar otro método estático que "poblara" los segmentos para cada número dentro del código de ImpresorLCD en algún momento, lo que me parece no debería suceder pues no es su responsabilidad. Preferí hacer que fuera necesario instanciar la clase, pues es más limpio.
 
 ### Variables
 
