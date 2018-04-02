@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 
 import java.util.ArrayList;
-public class TestJunit {
+public class TestImpresorLCD {
 
 
 	// impresoraLCD
@@ -28,6 +28,8 @@ public class TestJunit {
 		assertFalse("Acepta un String que no es numerico", Utilidades.esNumerico(stringNoNumerico));
 	}
 
+	// testing Utilidades
+
 	@Test
 	public void testImprimeCorrectamenteNumeroSolo() {
 		String resultadoEsperado =
@@ -50,6 +52,17 @@ public class TestJunit {
 
 	}
 
+
+	// testing impresion
+
+	@Test
+	public void testImpresionSeInicializaCorrectamente() {
+
+	}
+
+
+
+	// Testing impresoraLCD
 
 	@Test
 	public void testImprimeCorrectamenteCadenaDigitos() {
