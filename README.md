@@ -48,7 +48,7 @@ Ubicarse en el directorio raíz del repositorio y correr:
 
 Y luego correr:
 
-`java ImpresorLCD`
+`java LCDTester`
 
 
 ## Testing
@@ -64,7 +64,7 @@ Correr los tests:
 
 `java -cp ./:./testing_libraries/:./testing_libraries/ org.junit.runner.JUnitCore TestJunit`
 
-Pretendía separar las clases del proyecto y las clases de tests en dos carpetas diferentes. Esto hizo que debido a la manera como Java maneja los paquetes las clases de Test no pudieran acceder a las clases del proyecto. Hacer que funcione como pretendía es sencillo con Maven, Gradle o simplemente con in IDE como Eclipse, que nos ahorra el trabajo del manejo de los paquetes y las dependencias.
+Pretendía separar las clases del proyecto y las clases de tests en dos carpetas diferentes. Esto hizo que debido a la manera como Java maneja los paquetes las clases de Test no pudieran acceder a las clases del proyecto. Hacer que funcione como pretendía es sencillo con Maven, Gradle o simplemente con un IDE como Eclipse, que nos ahorra el trabajo del manejo de los paquetes y las dependencias.
 
 
 

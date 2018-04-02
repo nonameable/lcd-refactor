@@ -49,19 +49,19 @@ public class Impresion {
         
         // calcula puntos fijos
         pf1Inicial[0] = 0;
-        pf1Inicial[1] = 0 + pivotX;
+        pf1Inicial[1] = 0;
 
         pf2Inicial[0] = (filasDigito / 2);
-        pf2Inicial[1] = 0 + pivotX;
+        pf2Inicial[1] = 0;
 
         pf3Inicial[0] = (filasDigito - 1);
-        pf3Inicial[1] = 0 + pivotX;
+        pf3Inicial[1] = 0;
 
         pf4Inicial[0] = (filasDigito / 2);
-        pf4Inicial[1] = (columnasDigito - 1) + pivotX;
+        pf4Inicial[1] = (columnasDigito - 1);
 
         pf5Inicial[0] = 0;
-        pf5Inicial[1] = (columnasDigito - 1) + pivotX;
+        pf5Inicial[1] = (columnasDigito - 1);
 
     }
 
