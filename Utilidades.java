@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  *
  * Clase de utilidades para cualquier clase de nuestro programa.
@@ -12,7 +13,7 @@ public class Utilidades {
      *
      * @param cadena Cadena
      */  
-    static boolean esNumerico(String cadena) {
+    public static boolean esNumerico(String cadena) {
         try {
             Integer.parseInt(cadena);
             return true;
@@ -21,5 +22,20 @@ public class Utilidades {
         }
     }
 
-	
+    /**
+     * Método que retorna la matriz actual como un String.
+     * @param matriz String[][] con la matriz de strings que se quiere imprimir
+     */
+    public static String matrizComoString(String[][] matriz){
+        String matrizComoString = "";
+        
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                matrizComoString += matriz[i][j];
+            }
+            matrizComoString += "\n";
+        }
+
+        return matrizComoString;   
+    }	
 }

@@ -205,13 +205,8 @@ public class ImpresorLCD {
     private void imprimirMatriz(String[][] matriz){
         
         if( matriz != null){
-            // Imprime matriz
-            for (int i = 0; i < matriz.length; i++) {
-                for (int j = 0; j < matriz[i].length; j++) {
-                    System.out.print(matriz[i][j]);
-                }
-                System.out.println();
-            }
+            String matrizComoString = Utilidades.matrizComoString(matriz);
+            System.out.println(matrizComoString);
         }
         else {
             throw new NullPointerException("La matriz aún no ha sido inicializada");
@@ -314,7 +309,14 @@ public class ImpresorLCD {
         // Realiza la impresion de los digitos
         imprimirMatriz(matrizImpresion);
 
+    }
 
+    /**
+     *
+     * Metodo que retorna la matriz de impresion en su estado Actual
+     */ 
+    public String[][] darMatrizImpresion(){
+        return matrizImpresion;
     }
 
     
