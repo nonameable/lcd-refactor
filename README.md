@@ -39,17 +39,33 @@ Salida:
 
 
 
+
+## Corriendo el proyecto
+
+Ubicarse en el directorio raíz del repositorio y correr:
+
+`javac ./*.java`
+
+Y luego correr:
+
+`java ImpresorLCD`
+
+
 ## Testing
 
 Como no especificaron cómo querían incluir los tests, me abstuve de asumir que los iban a correr con Maven o Gradle. Teniendo esto en cuenta, decidí incluir las librerías necesarias para correr los tests en el repositorio `junit-4.12.jar` y `hamcrest-core-1.3.jar`. Estas librerías se encuentran en la carpeta /testing_libraries. Entonces, para correr las pruebas automáticas, ubicarse en el directorio raíz del repositorio y seguir los siquientes pasos:
 
-Compilar las clases donde están los tests:
 
-`javac -d ./tests/ -cp ./testing_libraries/junit-4.12.jar ./tests/*.java`
+Compilar las clases (incluída la clase de tests):
+
+`javac ./*.java`
 
 Correr los tests:
 
-`java -cp ./tests/:./testing_libraries/:./testing_libraries/ org.junit.runner.JUnitCore TestJunit`
+`java -cp ./:./testing_libraries/:./testing_libraries/ org.junit.runner.JUnitCore TestJunit`
+
+Pretendía separar las clases del proyecto y las clases de tests en dos carpetas diferentes. Esto hizo que debido a la manera como Java maneja los paquetes las clases de Test no pudieran acceder a las clases del proyecto. Hacer que funcione como pretendía es sencillo con Maven, Gradle o simplemente con in IDE como Eclipse, que nos ahorra el trabajo del manejo de los paquetes y las dependencias.
+
 
 
 ## Cambios en el refactoring

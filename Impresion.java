@@ -1,4 +1,3 @@
-
 /**
 * Clase que define a una impresion particular
 * Cada vez que se llame el metodo Imprimir de Nuevo, se crea una nueva instancia de la clase impresion

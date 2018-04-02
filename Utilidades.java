@@ -1,12 +1,8 @@
-
-
 /**
  *
  * Clase de utilidades para cualquier clase de nuestro programa.
  * Es extensible, es decir, cada vez que se necesite una nueva funcionalidad,
  * solo se necesita agregar un nuevo metodo estatico.
- *
- * @param cadena Cadena
  */  
 public class Utilidades {
 
