@@ -1,5 +1,5 @@
 # lcd-refactor
-Refactor of LCD number printer proposed by PSL. 
+Refactor de una impresora LCD propuesto por PSL.
 
 
 Objetivo: Crear un programa que imprime números en estilo de una pantalla LCD 
@@ -11,15 +11,18 @@ Salida: Imprimir los números especificados usando el caracter “-“ para los 
 Entre cada impresión debe haber una línea blanca. 
  
 Ejemplo: 
-Entrada: 
 
+**Entrada**: 
+
+<pre>
 2,12345
 
 3,67890 
 
 0,0 
+</pre>
    
-Salida:   
+**Salida**:   
  <pre>  
    _ _  _ _        _ _
 |     |    | |  | |
