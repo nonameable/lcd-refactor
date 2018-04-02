@@ -156,12 +156,12 @@ public class ImpresorLCD {
      * Esto lo hara llenando la matriz con simbolos "-" y "|" que representaran los digitos
      * @param int[] digitos array con los digitos a a Imprimir
      */    
-    private void insertarDigitosEnMatriz(int[] digitos) 
+    private void insertarDigitosEnMatriz(int[] digitos)
     {
         // Variable que permite moverse en la dimension X de la matriz de impresion
         for (int digito : digitos) {
             adicionarDigito(digito);
-            impresion.moverPivotX();         
+            impresion.moverPivotX();
         }
 
     }
@@ -247,7 +247,7 @@ public class ImpresorLCD {
      * y el numero a imprimir
      * @param espacioEntreDigitos Espacio Entre digitos
      */  
-    public void imprimir(String ordenDeImpresion, int espacioEntreDigitos) {
+    public void imprimir(String ordenDeImpresion, int espacioEntreDigitos){
         
         String[] parametros;
         
@@ -305,6 +305,7 @@ public class ImpresorLCD {
         
         // Insertamos los digitos en la matriz lienzo donde se pondran los simbolos "-" y "|"
         insertarDigitosEnMatriz(digitos);
+       
 
         // Realiza la impresion de los digitos
         imprimirMatriz(matrizImpresion);

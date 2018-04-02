@@ -17,12 +17,6 @@ public class TestUtilidades {
 		assertFalse("Acepta un String que no es numerico", Utilidades.esNumerico(stringNoNumerico));
 	}
 
-	
-
-
-
-
-
 }
 
 

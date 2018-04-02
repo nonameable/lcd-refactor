@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
   TestUtilidades.class,
   TestImpresorLCD.class,
+  TestImpresion.class
 })
 
 public class TestSuite {

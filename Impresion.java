@@ -125,7 +125,14 @@ public class Impresion {
      * entre cada par de digitos
      */
     public void moverPivotX(){
-    	pivotX = pivotX + columnasDigito + espacioEntreDigitos;
+        int nuevoPivotX = pivotX + columnasDigito + espacioEntreDigitos;
+        if(nuevoPivotX < totalColumnas){
+            pivotX = nuevoPivotX;
+        }
+    }
+
+    public int darPivotX(){
+        return pivotX;
     }
 
 
